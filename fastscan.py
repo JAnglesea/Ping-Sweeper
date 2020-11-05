@@ -3,15 +3,15 @@ import subprocess
 import os
 from datetime import datetime
 
-def pinger( job_q, results_q ):
+def pinger( jobQueue, resultsQueue ):
 	DEVNULL = open(os.devnull,"w")
 	while True:
-		ip = job_q.get()
+		ip = jobQueue.get()
 		if ip is None: break
 
 		try:
 			subprocess.check_call(['ping', '-c1',ip], stdout=DEVNULL)
-			results_q.put(ip)
+			resultsQueue.put(ip)
 		except:
 			pass
 
@@ -22,13 +22,13 @@ if __name__ == "__main__":
 	startTime = datetime.now()
 	print("Commencing Scan...")
 
-	pool_size = 255
+	poolSize = 255
 
 	jobs = multiprocessing.Queue()
 	results = multiprocessing.Queue()
 
 	pool = [ multiprocessing.Process(target=pinger, args=(jobs,results))
-		for i in range(pool_size) ]
+		for i in range(poolSize) ]
 
 	for p in pool:
 		p.start()
@@ -47,3 +47,7 @@ if __name__ == "__main__":
 		print("Host at: " + ip + " detected on the network")
 
 print ("Scan completed in: " + str(datetime.now() - startTime) + " seconds")
+
+
+
+
