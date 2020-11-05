@@ -1,5 +1,4 @@
 import subprocess
-import os
 from datetime import datetime
 
 net = input ("Enter the Network Address: ")
@@ -20,3 +19,23 @@ for i in alive:
 	print(i)
 
 print ("Scan completed in: " + str(datetime.now() - startTime) + " seconds")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
