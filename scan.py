@@ -10,7 +10,7 @@ startTime = datetime.now()
 
 print ("Scanning in Progress:")
 
-for ip in range(1,10):
+for ip in range(1,255):
 	host = netBits + str(ip)
 	isAlive  = subprocess.call(['ping', '-c1', host])
 	if isAlive == 0:
